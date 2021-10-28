@@ -17,4 +17,9 @@ class LoginControlador extends Controlador {
         }else
             ?><pre><?php print_r($usuario);?></pre><?php
     }
+
+    public function deslogar() {
+        DW3Sessao::deletar('usuario');
+        $this->redirecionar(URL_RAIZ);
+    }
 }

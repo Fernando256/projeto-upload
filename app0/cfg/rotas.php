@@ -3,7 +3,8 @@
 $rotas = [
     '/' => [
         'GET' => '\Controlador\AppControlador#index',
-        'POST' => '\Controlador\LoginControlador#login'
+        'POST' => '\Controlador\LoginControlador#login',
+        'DELETE' => 'Controlador\LoginControlador#deslogar'
     ],
     '/cadastro' => [
         'GET' => '\Controlador\AppControlador#cadastro',
@@ -11,6 +12,7 @@ $rotas = [
     ], 
     '/uploads' => [
         'GET' => '\Controlador\AppControlador#uploads',
+        'POST' => '\Controlador\UploadControlador#upload'
     ],
     '/upload/1' => [
         'GET' => '\Controlador\AppControlador#topicoUpload',

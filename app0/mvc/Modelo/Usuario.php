@@ -7,7 +7,7 @@ use \Framework\DW3BancoDeDados;
 class Usuario extends Modelo {
     const INSERIR_USUARIO = 'INSERT INTO usuarios(nome, email, senha) VALUES (?, ?, ?)';
     const BUSCAR_EMAIL = 'SELECT * FROM usuarios WHERE email = ?';
-    const BUSCAR_ID = 'SELECT * FROM usuarios WHERE id = ?';
+    const BUSCAR_ID = 'SELECT * FROM usuarios WHERE id_usuario = ?';
 
     private $id;
     private $nome;
@@ -78,7 +78,7 @@ class Usuario extends Modelo {
             $registro['nome'],
             null,
             $registro['email'],
-            $registro['id']
+            $registro['id_usuario']
         );
     }
 
@@ -91,7 +91,7 @@ class Usuario extends Modelo {
                $registro['nome'],
                null,
                $registro['email'],
-               $registro['id']
+               $registro['id_usuario']
            );
            $usuario->senhaCript = $registro['senha'];
        }
