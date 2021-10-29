@@ -2,11 +2,12 @@
 namespace Modelo;
 
 use \PDO;
+use \Modelo\Comentario;
 use \Framework\DW3BancoDeDados;
 
 class Topico extends Modelo {
     const BUSCAR_TOPICO = 'SELECT titulo, descricao, nome_arquivo, uploads.id_upload, uploads.id_usuario, nome FROM uploads JOIN usuarios USING (id_usuario) WHERE id_upload = ?';
-
+    
     private $id;
     private $titulo;
     private $descricao;
@@ -21,6 +22,10 @@ class Topico extends Modelo {
         $this->nomeArquivo = $nomeArquivo;
         $this->idUsuario = $idUsuario;
         $this->nomeUsuario = $nomeUsuario;
+    }
+
+    public function getId() {
+        return $this->id;
     }
 
     public function getNomeUsuario() {
@@ -50,5 +55,4 @@ class Topico extends Modelo {
             $registro['nome']
         );
     }
-
 }

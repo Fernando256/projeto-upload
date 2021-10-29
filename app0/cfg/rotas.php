@@ -17,6 +17,14 @@ $rotas = [
     '/upload/?' => [
         'GET' => '\Controlador\TopicoControlador#topicoUpload',
     ],
+    '/upload/?/comentario' => [
+        'POST' => '\Controlador\TopicoControlador#addComentario',
+        
+    ],
+    '/upload/?/comentario/?' => [
+        'PATCH' => '\Controlador\TopicoControlador#editarComentario',
+        'DELETE' => '\Controlador\TopicoControlador#deletarComentario'
+    ],
     '/upload-file' => [
         'GET' => '\Controlador\AppControlador#uploadFile',
     ],
