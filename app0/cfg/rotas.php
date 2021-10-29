@@ -11,11 +11,11 @@ $rotas = [
         'POST' => '\Controlador\CadastroControlador#cadastrar'
     ], 
     '/uploads' => [
-        'GET' => '\Controlador\AppControlador#uploads',
+        'GET' => '\Controlador\ListaUploadsControlador#uploads',
         'POST' => '\Controlador\UploadControlador#upload'
     ],
-    '/upload/1' => [
-        'GET' => '\Controlador\AppControlador#topicoUpload',
+    '/upload/?' => [
+        'GET' => '\Controlador\TopicoControlador#topicoUpload',
     ],
     '/upload-file' => [
         'GET' => '\Controlador\AppControlador#uploadFile',

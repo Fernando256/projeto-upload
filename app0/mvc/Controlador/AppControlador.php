@@ -15,11 +15,6 @@ class AppControlador extends Controlador {
         $this->visao('inicial/register-account.php', [], 'registro.php');
     }
 
-    public function topicoUpload() {
-        $this->verificarLogado();
-        $this->visao('inicial/topic-page.php', [], 'navbar.php');
-    }
-
     public function uploadFile() {
         $this->verificarLogado();
         $this->visao('inicial/upload-file.php', [], 'navbar.php');

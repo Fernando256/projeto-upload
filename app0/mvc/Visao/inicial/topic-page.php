@@ -4,15 +4,11 @@
 <body>  
     <main>
         <div class="main-content">
-            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus bibendum mattis felis at luctus.
-                 Nunc iaculis metus sapien, non congue.
-            </h4>
+            <h4><?=$topico->getTitulo()?></h4>
             <div class="body-upload-content">
-                <span>Nome Aleatorio</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus bibendum mattis felis at luctus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                     Phasellus bibendum mattis felis at luctus. Nunc iaculis metus sapien, non congue.
-               </p>
-               <button type="button" class="btn btn-primary">Download</button>
+                <span><?=$topico->getNomeUsuario()?></span>
+                <p><?=$topico->getDescricao()?></p>
+               <a href="<?= URL_PUBLICO?> files/10.pdf" download="Testando.pdf"><button type="button" class="btn btn-primary">Download</button></a>
             </div>
             <h5>Comentários:</h5>
             <div class="comment-content">

@@ -22,34 +22,22 @@
             </div>
         </div>
         <a href="<?=URL_RAIZ?>upload-file" ><button type="button" class="btn btn-primary" id="new-upload">Novo upload</button></a>
-        <a href="<?=URL_RAIZ?>upload/1">
+        <?php foreach ($uploads as $upload) :?>
+        <a href="<?=URL_RAIZ?>upload/<?= $upload->getId()?>">
             <div class="upload-block">
-                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                     Phasellus bibendum mattis felis at luctus. Nunc iaculis metus sapien, non congue.
-                </h3>
+                <h3><?= $upload->getDescricao()?></h3>
             </div>
         </a>
-        <a href="<?=URL_RAIZ?>upload/1">
-            <div class="upload-block">
-                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                     Phasellus bibendum mattis felis at luctus. Nunc iaculis metus sapien, non congue.
-                </h3>
-            </div>
-        </a>
-        <a href="<?=URL_RAIZ?>upload/1">
-            <div class="upload-block">
-                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                     Phasellus bibendum mattis felis at luctus. Nunc iaculis metus sapien, non congue.
-                </h3>
-            </div>
-        </a>
-        <a href="<?=URL_RAIZ?>upload/1">
-            <div class="upload-block">
-                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                     Phasellus bibendum mattis felis at luctus. Nunc iaculis metus sapien, non congue.
-                </h3>
-            </div>
-        </a>
+        <?php endforeach ?>
+        <div class="page-buttons">
+            <?php if ($pagina > 1) : ?>
+                <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina-1) ?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+            <?php endif ?>
+            <?php if ($pagina < $ultimaPagina) : ?>
+                <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina+1) ?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+            <?php endif ?>
+        </div>
     </div>
+
     <script src="<?= URL_JS ?>list-page.js"></script>
 </body>

@@ -64,3 +64,13 @@ body {
 #new-upload {
     margin-top: -1rem;
 }
+
+
+.page-buttons {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.page-buttons button {
+    margin-right: 1.5rem;
+}
