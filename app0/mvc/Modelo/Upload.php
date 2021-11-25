@@ -7,7 +7,7 @@ use \Framework\DW3ImagemUpload;
 
 
 class Upload extends Modelo {
-    const INSERIR_UPLOAD = "INSERT INTO uploads (titulo, descricao, nome_arquivo, id_usuario) VALUES (?, ?, ? ,?)";
+    const INSERIR_UPLOAD = "INSERT INTO uploads (titulo, descricao, ext_arquivo, id_usuario) VALUES (?, ?, ? ,?)";
 
     private $id;
     private $titulo;
@@ -53,11 +53,11 @@ class Upload extends Modelo {
     }
 
     private function salvarArquivo() {
-        if (DW3ImagemUpload::isValida($this->arquivo)) {
+        if ($this->arquivo) {
             $ext = pathinfo($this->arquivo['name'], PATHINFO_EXTENSION);
             $caminho = PASTA_PUBLICO . "files/{$this->id}.$ext";
-            DW3ImagemUpload::salvar($this->arquivo, $caminho);
-        }
+            DW3ImagemUpload::salvar($this->arquivo, $caminho); 
+        } 
     }
 
     public function inserir() {
@@ -65,7 +65,7 @@ class Upload extends Modelo {
         $comando = DW3BancoDeDados::prepare(self::INSERIR_UPLOAD);
         $comando->bindValue(1, $this->titulo, PDO::PARAM_STR);
         $comando->bindValue(2, $this->descricao, PDO::PARAM_STR);
-        $comando->bindValue(3, $this->arquivo["name"], PDO::PARAM_STR);
+        $comando->bindValue(3, pathinfo($this->arquivo["name"], PATHINFO_EXTENSION), PDO::PARAM_STR);
         $comando->bindValue(4, $this->idUsuario, PDO::PARAM_STR);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();

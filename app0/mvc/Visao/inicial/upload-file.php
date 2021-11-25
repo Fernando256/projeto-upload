@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="<?= URL_CSS?>upload-file.css">
 </head>
 <div class="upload-content">
-    <form action="<?= URL_RAIZ?>uploads" method="POST" enctype="multipart/form-data">
+    <form action="<?= URL_RAIZ?>upload-file" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Título</label>
             <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" required>

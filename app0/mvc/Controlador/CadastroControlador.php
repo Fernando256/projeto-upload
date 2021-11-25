@@ -15,8 +15,8 @@ class CadastroControlador extends Controlador {
             if(!$usuario->verificarEmailExistente($email)) {
                 $usuario->salvar();
                 $this->redirecionar(URL_RAIZ);
-            } else 
-                $this->redirecionar(URL_RAIZ . 'cadastro');
+            }
         }
+        $this->redirecionar(URL_RAIZ . 'cadastro');
     }
 }

@@ -48,7 +48,7 @@ class Comentario extends Modelo {
         $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
         $registros = $comando->fetchAll();
-        
+        $objetos = null;
         foreach ($registros as $registro) {
             $objetos[] = new Comentario(
                 $registro['id_comentario'],

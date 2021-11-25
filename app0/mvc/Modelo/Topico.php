@@ -6,20 +6,20 @@ use \Modelo\Comentario;
 use \Framework\DW3BancoDeDados;
 
 class Topico extends Modelo {
-    const BUSCAR_TOPICO = 'SELECT titulo, descricao, nome_arquivo, uploads.id_upload, uploads.id_usuario, nome FROM uploads JOIN usuarios USING (id_usuario) WHERE id_upload = ?';
+    const BUSCAR_TOPICO = 'SELECT titulo, descricao, ext_arquivo, uploads.id_upload, uploads.id_usuario, nome FROM uploads JOIN usuarios USING (id_usuario) WHERE id_upload = ?';
     
     private $id;
     private $titulo;
     private $descricao;
-    private $nomeArquivo;
+    private $extArquivo;
     private $idUsuario;
     private $nomeUsuario;
 
-    public function __construct($titulo, $descricao, $nomeArquivo = null, $id = null, $idUsuario = null, $nomeUsuario = null) {
+    public function __construct($titulo, $descricao, $extArquivo = null, $id = null, $idUsuario = null, $nomeUsuario = null) {
         $this->id = $id;
         $this->titulo = $titulo;
         $this->descricao = $descricao;
-        $this->nomeArquivo = $nomeArquivo;
+        $this->extArquivo = $extArquivo;
         $this->idUsuario = $idUsuario;
         $this->nomeUsuario = $nomeUsuario;
     }
@@ -40,6 +40,10 @@ class Topico extends Modelo {
         return $this->nomeUsuario;
     }
 
+    public function getExtArquivo() {
+        return $this->extArquivo;
+    }
+
     public static function buscarTopico($id) {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_TOPICO);
         $comando->bindValue(1, $id, PDO::PARAM_INT);
@@ -49,7 +53,7 @@ class Topico extends Modelo {
         return new Topico(
             $registro['titulo'],
             $registro['descricao'],
-            $registro['nome_arquivo'],
+            $registro['ext_arquivo'],
             $registro['id_upload'],
             $registro['id_usuario'],
             $registro['nome']

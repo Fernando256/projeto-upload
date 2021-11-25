@@ -10,31 +10,51 @@
         <div class="filters">
             <nav class="navbar navbar-light bg-dark">            
                 <div class="container-fluid">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Pesquisar</button>
-                    </form>
+                    <div class="sort">
+                        <h4>Pesquisar e ordenar:</h4>
+                        <form class="d-flex" class="sort-form">
+                            <input class="form-control me-2" id ="search" type="search" name="pesquisar" placeholder="Pesquisar" aria-label="Search">
+                            <select class="form-select" name="ordenar" required>   
+                                <option value="data">Data</option>
+                                <?php if ($_GET['ordenar'] === 'ordenacao') : ?>
+                                    <option value="ordenacao" selected>Alfabeticamente</option>
+                                <?php else : ?>
+                                    <option value="ordenacao">Alfabeticamente</option>
+                                <?php endif ?>
+                            </select>
+                            <button class="btn btn-outline-light" type="submit">Filtrar</button>
+                        </form>
+                    </div>
                 </div>
             </nav>
-            <div class="filter-date">
-                <h4>Filtrar:</h4>
-                <input type="text" id="date-range" name="daterange" value="" />
-            </div>
         </div>
-        <a href="<?=URL_RAIZ?>upload-file" ><button type="button" class="btn btn-primary" id="new-upload">Novo upload</button></a>
-        <?php foreach ($uploads as $upload) :?>
-        <a href="<?=URL_RAIZ?>upload/<?= $upload->getId()?>">
-            <div class="upload-block">
-                <h3><?= $upload->getDescricao()?></h3>
-            </div>
-        </a>
-        <?php endforeach ?>
+        <div class="config-buttons">
+            <a href="<?=URL_RAIZ?>upload-file" ><button type="button" class="btn btn-primary" id="new-upload">Novo upload</button></a>
+            <a href="<?=URL_RAIZ?>uploads/meus-uploads"><button type="button" class="btn btn-info">Meus Uploads</button></a>
+        </div>
+        <?php if ($uploads) : ?>
+            <?php foreach ($uploads as $upload) :?>
+            <a href="<?=URL_RAIZ?>upload/<?= $upload->getId()?>">
+                <div class="upload-block">
+                    <h3><?= $upload->getDescricao()?></h3>
+                </div>
+            </a>
+            <?php endforeach ?>
+        <?php endif?>
         <div class="page-buttons">
             <?php if ($pagina > 1) : ?>
-                <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina-1) ?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+                <?php if (isset($_GET['pesquisar'])) : ?>
+                    <a href="<?= URL_RAIZ . 'uploads?pesquisar=' . $_GET['pesquisar'] . "&ordenar=" . $_GET['ordenar']. "&p=" . ($pagina-1)?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+                <?php else : ?>
+                    <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina-1) ?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+                <?php endif ?>
             <?php endif ?>
             <?php if ($pagina < $ultimaPagina) : ?>
-                <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina+1) ?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+                <?php if (isset($_GET['pesquisar'])) : ?>
+                    <a href="<?= URL_RAIZ . 'uploads?pesquisar=' . $_GET['pesquisar'] . "&ordenar=" . $_GET['ordenar']. "&p=" .($pagina+1)?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+                <?php else : ?>
+                    <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina+1)?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+                <?php endif ?>
             <?php endif ?>
         </div>
     </div>

@@ -18,11 +18,29 @@ body {
 }
 
 .container-fluid {
+    display: flex;
     background-color: black;
     height: 100px;
     border: 1px solid rgb(204, 204, 204);
     border-radius: 10px;
+    justify-content: space-between !important;
+    padding: 0 1rem;
 }
+
+
+.sort-form {
+    display: flex;
+}
+
+.form-select{
+    margin-right: .5rem;
+}
+
+h4 {
+    color: white;
+    font-size: 20px;
+}
+
 
 .upload-block {
     background-color: rgb(32, 34, 37);
@@ -36,9 +54,15 @@ body {
     font-size: 24px;
 }
 
-.list-content a {
+.config-buttons {
     text-decoration: none;
+    margin-top: -1rem;
 }
+
+.config-buttons a{
+    margin-right: 1rem;
+}
+
 
 .list-content .navbar {
     background-color: rgb(47, 49, 54)!important;
@@ -50,21 +74,9 @@ body {
      border: 2px solid rgb(32, 34, 37);
 }
 
-.filter-date {
-    color: white;
-    position: absolute;
-    margin-top: -2.7rem;
-    margin-left: 600px;
+.sort-form select{
+    margin-right: .5rem;
 }
-
-.filter-date h4 {
-    font-size: 20px;
-}
-
-#new-upload {
-    margin-top: -1rem;
-}
-
 
 .page-buttons {
     margin-top: 3rem;

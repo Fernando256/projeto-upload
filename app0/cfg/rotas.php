@@ -12,7 +12,10 @@ $rotas = [
     ], 
     '/uploads' => [
         'GET' => '\Controlador\ListaUploadsControlador#uploads',
-        'POST' => '\Controlador\UploadControlador#upload'
+        
+    ],
+    '/uploads/meus-uploads' => [
+        'GET' => '\Controlador\ListaUploadsControlador#meusUploads'
     ],
     '/upload/?' => [
         'GET' => '\Controlador\TopicoControlador#topicoUpload',
@@ -27,6 +30,6 @@ $rotas = [
     ],
     '/upload-file' => [
         'GET' => '\Controlador\AppControlador#uploadFile',
+        'POST' => '\Controlador\UploadControlador#upload'
     ],
- 
 ];

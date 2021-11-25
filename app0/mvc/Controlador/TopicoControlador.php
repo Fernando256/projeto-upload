@@ -11,8 +11,6 @@ class TopicoControlador extends Controlador {
         $topico = Topico::buscarTopico($id);
         $comentarios = Comentario::buscarComentario($id);
         $idUsuarioLogado = DW3Sessao::get('usuario');
-        //$teste = file('/var/www/html/web3/app0/publico/filesfiles/10.pdf');
-
 
         $this->visao('inicial/topic-page.php', [
             'topico' => $topico,

@@ -11,11 +11,13 @@ class LoginControlador extends Controlador {
 
         $usuario = Usuario::buscarEmail($email);
 
-        if ($usuario && $usuario->verificarSenha($senha)) {
-            DW3Sessao::set('usuario', $usuario->getId());
-            $this->redirecionar(URL_RAIZ . 'uploads');
-        }else
-            ?><pre><?php print_r($usuario);?></pre><?php
+        if ($email && $senha) {
+            if ($usuario && $usuario->verificarSenha($senha)) {
+                DW3Sessao::set('usuario', $usuario->getId());
+                $this->redirecionar(URL_RAIZ . 'uploads');
+            }     
+        }   
+        $this->redirecionar(URL_RAIZ);     
     }
 
     public function deslogar() {

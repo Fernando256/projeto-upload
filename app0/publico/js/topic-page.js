@@ -1,14 +1,25 @@
 let comment = document.querySelector('#comment').innerText;
-let editComment = document.querySelector('.edit-comment');
-console.log(comment);
+let editComment = document.getElementsByClassName('edit-comment');
+let viewComment = document.getElementsByClassName('view-comment');
+console.log(editComment);
+console.log(viewComment);
 
-document.getElementById('edit-comment').addEventListener('click', () => {
-    document.querySelector('.view-comment').style.display = 'none';
-    editComment.style.display = 'inline';
-});
+function actionEdit(id) {
+    for (let i = 0; i < editComment.length; i++){
+        if (editComment[i].dataset.id == id) {
+            viewComment[i].style.display = 'none';
+            editComment[i].style.display = 'inline';
+            break;
+        }
+    }
+}
 
-document.querySelector('.cancel-button').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.querySelector('.view-comment').style.display = 'inline';
-    editComment.style.display = 'none';
-});
+function actionCancel(id) {
+    for (let i = 0; i < editComment.length; i++){
+        if (editComment[i].dataset.id == id) {
+            viewComment[i].style.display = 'inline';
+            editComment[i].style.display = 'none';
+            break;
+        }
+    }
+}

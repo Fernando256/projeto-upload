@@ -63,6 +63,10 @@ h5 {
     color: rgb(148, 143, 143);
 }
 
+form {
+    display: inline;
+}
+
 form label {
     color: white;
     font-size: 20px;
