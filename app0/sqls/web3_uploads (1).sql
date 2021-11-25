@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 04, 2021 at 10:26 PM
--- Server version: 8.0.26-0ubuntu0.20.04.2
+-- Generation Time: Nov 25, 2021 at 08:47 PM
+-- Server version: 8.0.27-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -53,7 +53,7 @@ CREATE TABLE `uploads` (
   `id_upload` int NOT NULL,
   `titulo` varchar(500) NOT NULL,
   `descricao` text NOT NULL,
-  `nome_arquivo` varchar(255) NOT NULL,
+  `ext_arquivo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `id_usuario` int NOT NULL,
   `data_upload` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -62,9 +62,14 @@ CREATE TABLE `uploads` (
 -- Dumping data for table `uploads`
 --
 
-INSERT INTO `uploads` (`id_upload`, `titulo`, `descricao`, `nome_arquivo`, `id_usuario`, `data_upload`) VALUES
-(14, 'Titulo upload', 'Descrição qualquer', 'cloud-computing.png', 4, '2021-11-05 01:25:01'),
-(15, 'Titulo 2', 'Descrição qualquer 2', 'cloud-computing.png', 4, '2021-11-05 01:25:33');
+INSERT INTO `uploads` (`id_upload`, `titulo`, `descricao`, `ext_arquivo`, `id_usuario`, `data_upload`) VALUES
+(16, 'Abobrinha', 'Abobrinha', 'png', 4, '2021-11-25 23:45:35'),
+(17, 'teste', 'Abacate', 'png', 4, '2021-11-25 23:45:52'),
+(18, 'teste', 'Beringela', 'png', 4, '2021-11-25 23:46:03'),
+(19, 'teste', 'Banana', 'png', 4, '2021-11-25 23:46:21'),
+(20, 'teste', 'Melancia', 'png', 4, '2021-11-25 23:46:46'),
+(21, 'teste', 'Melão', 'png', 4, '2021-11-25 23:47:00'),
+(22, 'teste', 'Rabanete', 'png', 4, '2021-11-25 23:47:15');
 
 -- --------------------------------------------------------
 
@@ -126,30 +131,13 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id_upload` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_upload` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `comentarios`
---
-ALTER TABLE `comentarios`
-  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_upload`) REFERENCES `uploads` (`id_upload`),
-  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
-
---
--- Constraints for table `uploads`
---
-ALTER TABLE `uploads`
-  ADD CONSTRAINT `uploads_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

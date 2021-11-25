@@ -28,46 +28,29 @@ class ListaUploads extends Modelo {
         $this->data = $data;
     }
 
-    public function getId() {
-        return $this->id;
-    }
+    public static function contarTodos($usuario = false, $id = null, $data = false) {
 
-    public function getDescricao() {
-        return $this->descricao;
-    }
-
-    public function getUsuarioId() {
-        return $this->usuarioId;
-    }
-
-    public static function contarTodos(
-        $usuario = false,
-        $id = null,
-        $dataInicial = null, 
-        $dataFinal = null
-    ) {
         //Verificar se é listagem de todos ou unico usuario
         if (!$usuario)
             $registros = DW3BancoDeDados::query(self::CONTAR_TODOS);
         else {
-            if ($dataInicial && $dataFinal) {
-                $comando = DW3BancoDeDados::prepare(self::CONTAR_TODOS_POR_USUARIO_PERIODO);
-                $comando->bindValue(1, $id, PDO::PARAM_INT);
-                $comando->bindValue(2, $dataInicial, PDO::PARAM_STR);
-                $comando->bindValue(3, $dataFinal, PDO::PARAM_STR);
-                $comando->execute();
-                $registros = $comando->fetch();
-                return intval($registros[0]);
-            }
-            $comando = DW3BancoDeDados::prepare(self::CONTAR_TODOS_POR_USUARIO);
-            $comando->bindValue(1, $id, PDO::PARAM_INT);
-            $comando->execute();
-            $registros = $comando->fetch();
-            return intval($registros[0]);
+            $data = self::validarData($data);
+            if ($data) 
+                return self::contarPorPeriodo($id, $data);
+            
+            return self::contarPorUsuario($id); 
         }
 
         $total = $registros->fetch();
         return intval($total[0]);
+    }
+
+    private static function contarPorUsuario($id) {
+        $comando = DW3BancoDeDados::prepare(self::CONTAR_TODOS_POR_USUARIO);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
+        $comando->execute();
+        $registros = $comando->fetch();
+        return intval($registros[0]);
     }
 
     public static function buscarTodos($limit = 6, $offset = 0, $busca = '', $ordenacao = null) {
@@ -80,20 +63,18 @@ class ListaUploads extends Modelo {
         $comando->execute();       
 
         $registros = $comando->fetchAll();
-        $objetos = array();
 
-        if ($registros) {
-            foreach ($registros as $registro) {
-                $objetos[] = new ListaUploads(
-                    $registro['id_upload'],
-                    $registro['id_usuario'],
-                    $registro['titulo'],
-                    $registro['descricao'],
-                    $registro['data_upload']
-                );
-            }
-        }
-        return $objetos;
+        return self::fazerALista($registros);
+    }
+
+    public static function buscarTodosPorUsuario($limit = 6, $offset = 0, $id, $data = false) {
+        $data = self::validarData($data);
+        if ($data) 
+            $registros = self::buscarPorPeriodo($id, $data, $limit, $offset);
+        else 
+            $registros = self::buscarPorUsuario($id, $limit, $offset);
+        
+        return self::fazerALista($registros);
     }
 
     private static function validarData($data) {
@@ -110,34 +91,6 @@ class ListaUploads extends Modelo {
             }
         }       
         return false;
-    }
- 
-    public static function buscarTodosPorUsuario($limit = 6, $offset = 0, $id, $data = false) {
-        $data = self::validarData($data);
-        if ($data) {
-            $registros = self::buscarPorPeriodo($id, $data, $limit, $offset);
-        } else {
-            $comando = DW3BancoDeDados::prepare(self::SELECT_POR_USUARIO);
-            $comando->bindValue(1, $id, PDO::PARAM_INT);
-            $comando->bindValue(2, $limit, PDO::PARAM_INT);
-            $comando->bindValue(3, $offset, PDO::PARAM_INT);
-            $comando->execute();
-            $registros = $comando->fetchAll();
-        }
-        
-        return self::fazerALista($registros);
-    }
-
-    private static function buscarPorPeriodo($id, $data, $limit, $offset) {
-        $comando = DW3BancoDeDados::prepare(self::SELECT_POR_USUARIO_PERIODO);
-        $comando->bindValue(1, $id, PDO::PARAM_INT);
-        $comando->bindValue(2, $data[0], PDO::PARAM_STR);
-        $comando->bindValue(3, $data[1], PDO::PARAM_STR);
-        $comando->bindValue(4, $limit, PDO::PARAM_INT);
-        $comando->bindValue(5, $offset, PDO::PARAM_INT);
-        $comando->execute();
-
-        return $comando->fetchAll();
     }
 
     private static function ordenarUploads($ordenacao) {
@@ -164,7 +117,49 @@ class ListaUploads extends Modelo {
                 );
             }
         }
-
         return $objetos;
+    }
+
+    private static function contarPorPeriodo($id, $data) {
+        $comando = DW3BancoDeDados::prepare(self::CONTAR_TODOS_POR_USUARIO_PERIODO);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(2, $data[0], PDO::PARAM_STR);
+        $comando->bindValue(3, $data[1], PDO::PARAM_STR);
+        $comando->execute();
+        $registros = $comando->fetch();
+        return intval($registros[0]);
+    }
+
+    private static function buscarPorUsuario($id, $limit, $offset) {
+        $comando = DW3BancoDeDados::prepare(self::SELECT_POR_USUARIO);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(2, $limit, PDO::PARAM_INT);
+        $comando->bindValue(3, $offset, PDO::PARAM_INT);
+        $comando->execute();
+        return $comando->fetchAll();
+    }
+
+    private static function buscarPorPeriodo($id, $data, $limit, $offset) {
+        $comando = DW3BancoDeDados::prepare(self::SELECT_POR_USUARIO_PERIODO);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(2, $data[0], PDO::PARAM_STR);
+        $comando->bindValue(3, $data[1], PDO::PARAM_STR);
+        $comando->bindValue(4, $limit, PDO::PARAM_INT);
+        $comando->bindValue(5, $offset, PDO::PARAM_INT);
+        $comando->execute();
+
+        return $comando->fetchAll();
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getDescricao() {
+        return $this->descricao;
+    }
+
+    public function getUsuarioId() {
+        return $this->usuarioId;
     }
 }
