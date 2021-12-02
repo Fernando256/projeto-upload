@@ -12,10 +12,10 @@
     <nav>
         <img src="<?= URL_IMG ?>cloud-computing-white.png" alt="logo">
         <a href="<?=URL_RAIZ?>uploads"><span>Upload Media</span></a>
-        <form action="<?= URL_RAIZ ?>" method="post" class="inline">
+        <form action="<?= URL_RAIZ . 'login'?>" method="post" class="inline">
             <input type="hidden" name="_metodo" value="DELETE">
-            <a href="<?=URL_RAIZ?>" onclick="event.preventDefault(); this.parentNode.submit()">
-                <img src="<?= URL_IMG ?>log-out-white.png" alt="leave">
+            <a href="<?=URL_RAIZ . 'login' ?>" onclick="event.preventDefault(); this.parentNode.submit()">
+                <img src="<?= URL_IMG?>log-out-white.png" alt="leave">
             </a>
         </form>
 

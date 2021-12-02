@@ -8,7 +8,7 @@ class Comentario extends Modelo {
     const BUSCAR_COMENTARIOS= 'SELECT id_comentario, comentario, id_upload, id_usuario, nome FROM comentarios JOIN usuarios USING (id_usuario) WHERE id_upload = ?';
     const INSERIR_COMENTARIO= 'INSERT INTO comentarios (comentario, id_upload, id_usuario) VALUES (?, ?, ?)';
     const EDITAR_COMENTARIO= 'UPDATE comentarios SET comentario = ? WHERE id_upload = ? && id_comentario = ?';
-    const DELETAR_COMENTARIO = 'DELETE FROM comentarios WHERE id_upload = ? && id_comentario = ?';
+    const DELETAR_COMENTARIO = 'DELETE FROM comentarios WHERE id_comentario = ?';
 
     private $id;
     private $comentario;
@@ -43,7 +43,7 @@ class Comentario extends Modelo {
         return $this->nomeUsuario;
     }
 
-    public static function buscarComentario($id) {
+    public static function buscarComentarios($id) {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_COMENTARIOS);
         $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
@@ -84,10 +84,9 @@ class Comentario extends Modelo {
         $comando->execute();
     }
 
-    public static function deletarComentario($idUpload, $idComentario) {
+    public static function deletarComentario($idComentario) {
         $comando = DW3BancoDeDados::prepare(self::DELETAR_COMENTARIO);
-        $comando->bindValue(1, $idUpload, PDO::PARAM_INT);
-        $comando->bindValue(2, $idComentario, PDO::PARAM_INT);
+        $comando->bindValue(1, $idComentario, PDO::PARAM_INT);
         $comando->execute();
     }
 }

@@ -9,7 +9,7 @@ class TopicoControlador extends Controlador {
     public function topicoUpload($id) {
         $this->verificarLogado();
         $topico = Topico::buscarTopico($id);
-        $comentarios = Comentario::buscarComentario($id);
+        $comentarios = Comentario::buscarComentarios($id);
         $idUsuarioLogado = DW3Sessao::get('usuario');
 
         $this->visao('inicial/topic-page.php', [
@@ -32,7 +32,7 @@ class TopicoControlador extends Controlador {
     }
 
     public function deletarComentario($idTopico, $idComentario) {
-        Comentario::deletarComentario($idTopico, $idComentario);
+        Comentario::deletarComentario($idComentario);
         $this->redirecionar(URL_RAIZ . "upload/$idTopico");
     }
 }

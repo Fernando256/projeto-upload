@@ -5,11 +5,8 @@ use \Teste\Teste;
 
 class TesteRaiz extends Teste
 {
-    public function testeAcessar()
-    {
-        //$resposta = $this->get(URL_RAIZ);
-
-        //var_dump("ERROR: ");
-        //$this->verificar(strpos($resposta['html'], 'Login') !== false);
+    public function testeAcessar() {
+        $resposta = $this->get(URL_RAIZ . 'login');
+        $this->verificar(strpos($resposta['html'], 'Login') !== false);
     }
 }

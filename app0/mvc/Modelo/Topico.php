@@ -33,11 +33,11 @@ class Topico extends Modelo {
     }
 
     public function getTitulo() {
-        return $this->nomeUsuario;
+        return $this->titulo;
     }
 
     public function getDescricao() {
-        return $this->nomeUsuario;
+        return $this->descricao;
     }
 
     public function getExtArquivo() {

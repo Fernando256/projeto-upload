@@ -1,6 +1,6 @@
 <div class="login-form">
     <h1>Login</h1>
-    <form action="<?=URL_RAIZ?>" method="POST">
+    <form action="<?=URL_RAIZ . 'login'?>" method="POST">
         <div class="inputs-login">
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>

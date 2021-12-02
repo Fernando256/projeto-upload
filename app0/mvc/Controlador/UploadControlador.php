@@ -4,7 +4,12 @@ namespace Controlador;
 use \Modelo\Upload;
 use \Framework\DW3Sessao;
 
-class UploadControlador extends Controlador { 
+class UploadControlador extends Controlador {
+    public function index() {
+        $this->verificarLogado();
+        $this->visao('inicial/upload-file.php', [], 'navbar.php');
+    } 
+
     public function upload() {
         $titulo = $_POST['titulo'];
         $descricao = $_POST['descricao'];

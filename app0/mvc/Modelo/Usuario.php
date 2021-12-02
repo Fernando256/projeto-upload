@@ -45,7 +45,7 @@ class Usuario extends Modelo {
         $this->inserir();
     }
 
-    public function inserir() {
+    private function inserir() {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR_USUARIO);
         $comando->bindValue(1, $this->nome, PDO::PARAM_STR);

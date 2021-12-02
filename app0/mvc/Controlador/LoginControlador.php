@@ -5,6 +5,10 @@ use \Modelo\Usuario;
 use \Framework\DW3Sessao;
 
 class LoginControlador extends Controlador {
+    public function index() {
+        $this->visao('inicial/index.php');
+    }
+    
     public function login() {
         $email = $_POST['email'];
         $senha = $_POST['password'];
@@ -17,11 +21,11 @@ class LoginControlador extends Controlador {
                 $this->redirecionar(URL_RAIZ . 'uploads');
             }     
         }   
-        $this->redirecionar(URL_RAIZ);     
+        $this->redirecionar(URL_RAIZ . 'login');     
     }
 
     public function deslogar() {
         DW3Sessao::deletar('usuario');
-        $this->redirecionar(URL_RAIZ);
+        $this->redirecionar(URL_RAIZ . 'login');
     }
 }

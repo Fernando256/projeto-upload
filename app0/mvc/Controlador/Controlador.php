@@ -12,7 +12,7 @@ abstract class Controlador extends DW3Controlador {
     protected function verificarLogado() {
         $usuario = $this->getUsuario();
         if ($usuario == null) {
-            $this->redirecionar(URL_RAIZ);
+            $this->redirecionar(URL_RAIZ . 'login');
         }
     }
 

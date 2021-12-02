@@ -17,7 +17,7 @@
         </div>
         <div class="buttons-login">
             <button type="submit" class="btn btn-primary">Cadastrar</button>
-            <a href="<?=URL_RAIZ?>"><button type="button" class="btn btn-secondary">Login</button></a>
+            <a href="<?=URL_RAIZ . 'login'?>"><button type="button" class="btn btn-secondary">Login</button></a>
         </div>
     </form>
 </div>

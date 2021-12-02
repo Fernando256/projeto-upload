@@ -32,7 +32,7 @@
                                     <div class="mb-3">
                                         <textarea class="form-control" id="edit-comment-textarea" name="edit-comment-textarea" rows="3" required><?=$comentario->getComentario()?></textarea>
                                     </div>
-                                    <button class="btn btn-primary">Enviar</button>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
                                     <button class="btn btn-danger cancel-button" onclick="event.preventDefault(); actionCancel(<?= $comentario->getId();?>);">Cancelar</button>
                                 </form>
                             </div>
@@ -46,7 +46,7 @@
         <form action="<?=URL_RAIZ . "upload/" . $topico->getId()?>/comentario" method="POST">
             <div class="mb-3">
                 <label class="form-label">Adicionar comentário:</label>
-                <textarea class="form-control" id="add-comment" name="add-comment" rows="3"></textarea>
+                <textarea class="form-control" id="add-comment" name="add-comment" rows="3" required></textarea>
             </div>
             <button class="btn btn-primary">Enviar</button>
         </form>

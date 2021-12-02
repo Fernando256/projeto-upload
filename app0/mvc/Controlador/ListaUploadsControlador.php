@@ -5,7 +5,7 @@ use \Modelo\Upload;
 use \Framework\DW3Sessao;
 
 class ListaUploadsControlador extends Controlador {
-    public function uploads() {
+    public function index() {
         $this->verificarLogado();
         $conteudo = $this->calcularPaginacao();
         $idUsuario = DW3Sessao::get('usuario');
