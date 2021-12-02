@@ -2,14 +2,13 @@
 namespace Controlador;
 
 use \Modelo\Usuario;
-use \Framework\DW3Sessao;
 
 class CadastroControlador extends Controlador {
     public function index() {
         $this->visao('inicial/register-account.php', [], 'registro.php');
     }
 
-    public function cadastrar() {
+    public function armazenar() {
         $nome = $_POST['name'];
         $email = $_POST['email'];
         $senha = $_POST['password'];

@@ -6,7 +6,7 @@ use \Modelo\Comentario;
 use \Framework\DW3Sessao;
 
 class TopicoControlador extends Controlador {
-    public function topicoUpload($id) {
+    public function mostrar($id) {
         $this->verificarLogado();
         $topico = Topico::buscarTopico($id);
         $comentarios = Comentario::buscarComentarios($id);
@@ -19,19 +19,19 @@ class TopicoControlador extends Controlador {
         ], 'navbar.php');
     }
 
-    public function addComentario($id) {
+    public function armazenar($id) {
         $idUsuarioLogado = DW3Sessao::get('usuario');
         $comentario = new Comentario(null, $_POST['add-comment'], $idUsuarioLogado, $id);
         $comentario->salvarNovoComentario();
         $this->redirecionar(URL_RAIZ . "upload/$id");
     }
 
-    public function editarComentario($idTopico, $idComentario) {
+    public function atualizar($idTopico, $idComentario) {
         Comentario::updateComentario(intval($idTopico), intval($idComentario), $_POST['edit-comment-textarea']);
         $this->redirecionar(URL_RAIZ . "upload/$idTopico");
     }
 
-    public function deletarComentario($idTopico, $idComentario) {
+    public function destruir($idTopico, $idComentario) {
         Comentario::deletarComentario($idComentario);
         $this->redirecionar(URL_RAIZ . "upload/$idTopico");
     }

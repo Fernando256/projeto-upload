@@ -9,7 +9,7 @@ class LoginControlador extends Controlador {
         $this->visao('inicial/index.php');
     }
     
-    public function login() {
+    public function armazenar() {
         $email = $_POST['email'];
         $senha = $_POST['password'];
 
@@ -24,7 +24,7 @@ class LoginControlador extends Controlador {
         $this->redirecionar(URL_RAIZ . 'login');     
     }
 
-    public function deslogar() {
+    public function destruir() {
         DW3Sessao::deletar('usuario');
         $this->redirecionar(URL_RAIZ . 'login');
     }

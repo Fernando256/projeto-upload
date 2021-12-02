@@ -10,7 +10,7 @@ class UploadControlador extends Controlador {
         $this->visao('inicial/upload-file.php', [], 'navbar.php');
     } 
 
-    public function upload() {
+    public function armazenar() {
         $titulo = $_POST['titulo'];
         $descricao = $_POST['descricao'];
         $arquivo = array_key_exists('upload-arquivo', $_FILES) ? $_FILES['upload-arquivo'] : null;

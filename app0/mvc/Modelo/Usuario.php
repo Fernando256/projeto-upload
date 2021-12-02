@@ -73,13 +73,15 @@ class Usuario extends Modelo {
         $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
         $registro = $comando->fetch();
-
-        return new Usuario(
-            $registro['nome'],
-            null,
-            $registro['email'],
-            $registro['id_usuario']
-        );
+        if ($registro) {
+            return new Usuario(
+                $registro['nome'],
+                null,
+                $registro['email'],
+                $registro['id_usuario']
+            );
+        } else
+            return null;
     }
 
     public static function buscarEmail($email) {
