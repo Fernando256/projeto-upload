@@ -3,7 +3,6 @@ namespace Teste\Funcional;
 
 use Framework\DW3BancoDeDados;
 use \Modelo\Usuario;
-use \Framework\DW3Sessao;
 use \Teste\Teste;
 
 class TesteCadastrar extends Teste {
@@ -33,10 +32,13 @@ class TesteCadastrar extends Teste {
             'email' => 'teste@teste.com',
             'password' => '123'
         ]);
+        
         $this->verificarRedirecionar($resposta, URL_RAIZ . 'cadastro');
         $resposta = $this->get(URL_RAIZ . 'cadastro');
+        $this->verificarContem($resposta, 'Email inválido ou já existente!');
         $query = DW3BancoDeDados::query('SELECT * FROM usuarios where email = "teste@teste.com"');
         $bdUsuarios = $query->fetchAll();
         $this->verificar(count($bdUsuarios) == 1);
+        
     }
 }

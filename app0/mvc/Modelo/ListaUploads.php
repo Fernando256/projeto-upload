@@ -53,7 +53,7 @@ class ListaUploads extends Modelo {
         return intval($registros[0]);
     }
 
-    public static function buscarTodos($limit = 6, $offset = 0, $busca = '', $ordenacao = null) {
+    public static function buscarTodos($busca = '', $limit = 6, $offset = 0, $ordenacao = null) {
         $sql = str_replace(':order', self::ordenarUploads($ordenacao), self::SELECT_UPLOADS);
         $comando = DW3BancoDeDados::prepare($sql);
         $comando->bindValue(1, $busca, PDO::PARAM_STR);
@@ -67,7 +67,7 @@ class ListaUploads extends Modelo {
         return self::fazerALista($registros);
     }
 
-    public static function buscarTodosPorUsuario($limit = 6, $offset = 0, $id, $data = false) {
+    public static function buscarTodosPorUsuario($id, $limit = 6, $offset = 0, $data = false) {
         $data = self::validarData($data);
         if ($data) 
             $registros = self::buscarPorPeriodo($id, $data, $limit, $offset);

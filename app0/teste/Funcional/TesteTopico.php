@@ -1,8 +1,6 @@
 <?php 
 namespace Teste\Funcional;
 
-use Framework\DW3BancoDeDados;
-use \Modelo\Usuario;
 use \Framework\DW3Sessao;
 use Modelo\Comentario;
 use \Teste\Teste;
@@ -33,7 +31,7 @@ class TesteTopico extends Teste {
     public function testeDeleteComentario() {
         $this->logar();
         $idUsuarioLogado = DW3Sessao::get('usuario');
-        (new Comentario(null, 'ABC2', $idUsuarioLogado, 16))->salvarNovoComentario();
+        (new Comentario('ABC2', $idUsuarioLogado, 16))->salvarNovoComentario();
         $resposta = $this->get(URL_RAIZ . 'upload/16');
         $this->verificarContem($resposta, 'ABC2');
         $resposta = $this->delete(URL_RAIZ . 'upload/16/comentario/1');
@@ -43,7 +41,7 @@ class TesteTopico extends Teste {
     public function testeUpdateComentario() {
         $this->logar();
         $idUsuarioLogado = DW3Sessao::get('usuario');
-        (new Comentario(null, 'ABC', $idUsuarioLogado, 16))->salvarNovoComentario();
+        (new Comentario('ABC', $idUsuarioLogado, 16))->salvarNovoComentario();
         $resposta = $this->get(URL_RAIZ . 'upload/16');
         $this->verificarContem($resposta, 'ABC');
         $this->patch(URL_RAIZ . 'upload/16/comentario/1', [
@@ -51,7 +49,5 @@ class TesteTopico extends Teste {
         ]);
         $resposta = $this->get(URL_RAIZ . 'upload/16');
         $this->verificarContem($resposta, 'ABC2');
-    }
-
-    
+    }   
 }

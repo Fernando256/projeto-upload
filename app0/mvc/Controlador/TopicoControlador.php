@@ -21,7 +21,7 @@ class TopicoControlador extends Controlador {
 
     public function armazenar($id) {
         $idUsuarioLogado = DW3Sessao::get('usuario');
-        $comentario = new Comentario(null, $_POST['add-comment'], $idUsuarioLogado, $id);
+        $comentario = new Comentario($_POST['add-comment'], $idUsuarioLogado, $id);
         $comentario->salvarNovoComentario();
         $this->redirecionar(URL_RAIZ . "upload/$id");
     }

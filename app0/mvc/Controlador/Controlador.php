@@ -37,13 +37,13 @@ abstract class Controlador extends DW3Controlador {
             if (isset($_GET['daterange'])) 
                 $data = explode(' - ' ,$_GET['daterange']);
             
-            $uploads = ListaUploads::buscarTodosPorUsuario($limit, $offset, $id, $data);
+            $uploads = ListaUploads::buscarTodosPorUsuario($id, $limit, $offset, $data);
             $ultimaPagina = ceil(ListaUploads::contarTodos(true, $id, $data) / $limit);
         } else {
             $busca = isset($_GET['pesquisar']) ? $_GET['pesquisar'] : '';
             $ordenacao = isset($_GET['ordenar']) ? $_GET['ordenar'] : null;
             
-            $uploads = ListaUploads::buscarTodos($limit, $offset, $busca, $ordenacao);
+            $uploads = ListaUploads::buscarTodos($busca, $limit, $offset, $ordenacao);
             $ultimaPagina = ceil(ListaUploads::contarTodos() / $limit);
         }  
         return compact('pagina', 'uploads', 'ultimaPagina');

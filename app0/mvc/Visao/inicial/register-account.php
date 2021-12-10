@@ -1,5 +1,10 @@
 <div class="register-form">
     <h1>Cadastro</h1>
+    <?php if ($mensagem) : ?>
+        <div class="alert alert-danger alert-dismissible">
+            <?= $mensagem ?>
+        </div>
+    <?php endif ?>
     <form action="<?= URL_RAIZ?>cadastro" method="POST">
         <div class="inputs-login">
             <div class="form-floating">

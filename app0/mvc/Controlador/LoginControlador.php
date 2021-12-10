@@ -6,7 +6,9 @@ use \Framework\DW3Sessao;
 
 class LoginControlador extends Controlador {
     public function index() {
-        $this->visao('inicial/index.php');
+        $this->visao('inicial/index.php', [
+            'mensagem' => DW3Sessao::getFlash('mensagem', null)
+        ]);
     }
     
     public function armazenar() {
@@ -20,7 +22,8 @@ class LoginControlador extends Controlador {
                 DW3Sessao::set('usuario', $usuario->getId());
                 $this->redirecionar(URL_RAIZ . 'uploads');
             }     
-        }   
+        }
+        DW3Sessao::setFlash('mensagem', 'Dados inseridos são inválidos!');  
         $this->redirecionar(URL_RAIZ . 'login');     
     }
 

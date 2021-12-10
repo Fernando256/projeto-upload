@@ -1,9 +1,6 @@
 <?php 
 namespace Teste\Funcional;
 
-use Framework\DW3BancoDeDados;
-use \Modelo\Usuario;
-use \Framework\DW3Sessao;
 use \Teste\Teste;
 
 class TesteListagem extends Teste {

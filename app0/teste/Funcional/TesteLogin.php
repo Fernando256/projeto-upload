@@ -29,6 +29,8 @@ class TesteLogin extends Teste {
         ]);
         $this->verificarRedirecionar($resposta, URL_RAIZ . 'login');
         $this->verificar(DW3Sessao::get('usuario') == null);
+        $resposta = $this->get(URL_RAIZ . 'login');
+        $this->verificarContem($resposta, 'Dados inseridos são inválidos!');
     }
 
     public function testeDeslogar()

@@ -15,7 +15,7 @@ class Comentario extends Modelo {
     private $idUsuario;
     private $idUpload;
 
-    public function __construct($id = null, $comentario, $idUsuario, $idUpload, $nomeUsuario = null) {
+    public function __construct($comentario, $idUsuario, $idUpload, $id = null, $nomeUsuario = null) {
         $this->id = $id;
         $this->comentario = $comentario;
         $this->idUsuario = $idUsuario;
@@ -51,10 +51,10 @@ class Comentario extends Modelo {
         $objetos = null;
         foreach ($registros as $registro) {
             $objetos[] = new Comentario(
-                $registro['id_comentario'],
                 $registro['comentario'],
                 $registro['id_usuario'],
                 $registro['id_upload'],
+                $registro['id_comentario'],
                 $registro['nome']
             );
         }

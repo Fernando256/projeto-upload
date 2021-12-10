@@ -2,10 +2,13 @@
 namespace Controlador;
 
 use \Modelo\Usuario;
+use \Framework\DW3Sessao;
 
 class CadastroControlador extends Controlador {
     public function index() {
-        $this->visao('inicial/register-account.php', [], 'registro.php');
+        $this->visao('inicial/register-account.php', [
+            'mensagem' => DW3Sessao::getFlash('mensagem', null)
+        ], 'registro.php');
     }
 
     public function armazenar() {
@@ -20,6 +23,7 @@ class CadastroControlador extends Controlador {
                 $this->redirecionar(URL_RAIZ . 'login');
             }
         }
+        DW3Sessao::setFlash('mensagem', 'Email inválido ou já existente!');
         $this->redirecionar(URL_RAIZ . 'cadastro');
     }
 }

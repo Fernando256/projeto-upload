@@ -13,8 +13,12 @@
                     <div class="sort">
                         <h4>Pesquisar e ordenar:</h4>
                         <form class="d-flex" class="sort-form">
-                            <input class="form-control me-2" id ="search" type="search" name="pesquisar" placeholder="Pesquisar" aria-label="Search">
-                            <select class="form-select" name="ordenar" required>   
+                            <?php if (isset($_GET['pesquisar'])) :?>
+                                <input class="form-control me-2" id ="search" type="search" name="pesquisar" placeholder="Pesquisar" aria-label="Search" value="<?=$_GET['pesquisar']?>">
+                            <?php else : ?>
+                                <input class="form-control me-2" id ="search" type="search" name="pesquisar" placeholder="Pesquisar" aria-label="Search">
+                            <?php endif;?>
+                                <select class="form-select" name="ordenar" required>   
                                 <option value="data">Data</option>
                                 <?php if ($_GET['ordenar'] === 'ordenacao') : ?>
                                     <option value="ordenacao" selected>Alfabeticamente</option>
@@ -42,20 +46,22 @@
             <?php endforeach ?>
         <?php endif?>
         <div class="page-buttons">
-            <?php if ($pagina > 1) : ?>
-                <?php if (isset($_GET['pesquisar'])) : ?>
-                    <a href="<?= URL_RAIZ . 'uploads?pesquisar=' . $_GET['pesquisar'] . "&ordenar=" . $_GET['ordenar']. "&p=" . ($pagina-1)?>"><button type="button" class="btn btn-light">Página anterior</button></a>
-                <?php else : ?>
-                    <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina-1) ?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+            <?php if ($uploads) : ?>
+                <?php if ($pagina > 1) : ?>
+                    <?php if (isset($_GET['pesquisar'])) : ?>
+                        <a href="<?= URL_RAIZ . 'uploads?pesquisar=' . $_GET['pesquisar'] . "&ordenar=" . $_GET['ordenar']. "&p=" . ($pagina-1)?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+                    <?php else : ?>
+                        <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina-1) ?>"><button type="button" class="btn btn-light">Página anterior</button></a>
+                    <?php endif ?>
                 <?php endif ?>
-            <?php endif ?>
-            <?php if ($pagina < $ultimaPagina) : ?>
-                <?php if (isset($_GET['pesquisar'])) : ?>
-                    <a href="<?= URL_RAIZ . 'uploads?pesquisar=' . $_GET['pesquisar'] . "&ordenar=" . $_GET['ordenar']. "&p=" .($pagina+1)?>"><button type="button" class="btn btn-light">Próxima página</button></a>
-                <?php else : ?>
-                    <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina+1)?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+                <?php if ($pagina < $ultimaPagina) : ?>
+                    <?php if (isset($_GET['pesquisar'])) : ?>
+                        <a href="<?= URL_RAIZ . 'uploads?pesquisar=' . $_GET['pesquisar'] . "&ordenar=" . $_GET['ordenar']. "&p=" .($pagina+1)?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+                    <?php else : ?>
+                        <a href="<?= URL_RAIZ . 'uploads?p=' . ($pagina+1)?>"><button type="button" class="btn btn-light">Próxima página</button></a>
+                    <?php endif ?>
                 <?php endif ?>
-            <?php endif ?>
+            <?php endif?>
         </div>
     </div>
 

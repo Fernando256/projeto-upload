@@ -1,5 +1,10 @@
 <div class="login-form">
     <h1>Login</h1>
+    <?php if ($mensagem) : ?>
+        <div class="alert alert-danger alert-dismissible">
+            <?= $mensagem ?>
+        </div>
+    <?php endif ?>
     <form action="<?=URL_RAIZ . 'login'?>" method="POST">
         <div class="inputs-login">
             <div class="form-floating mb-3">
